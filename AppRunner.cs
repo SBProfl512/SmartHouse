@@ -17,7 +17,7 @@ namespace SmartHomeApp
             // Создаем конкретные объекты железа (выделяется память в куче)
             SmartLamp lamp = new SmartLamp();
             SmartKettle kettle = new SmartKettle();
-            ISmartDevice airCondice = new SmartAirConditioner();
+            SmartAirConditioner airCondice = new SmartAirConditioner();
 
             // Включаем устройства напрямую через их собственные методы
             //lamp.TurnOn();
@@ -29,19 +29,17 @@ namespace SmartHomeApp
             home.AddDivices(kettle);
             home.AddDivices(airCondice);
             airCondice.TurnOn();
-            if(lamp is ISmartDevice lampy) lampy.TurnOn();
+            
+            lamp.TurnOn();
 
             
-           if(airCondice is SmartAirConditioner airConditione) airConditione.SetTemp(5, (x,y) => x - y );
+            airCondice.SetTemp(7, (x,y) => x + y );
           
 
             // Выключаем весь дом одной кнопкой
             home.TurnOffEverytghing();
 
-        
 
-        
-           
         }
 
     }

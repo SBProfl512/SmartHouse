@@ -12,24 +12,16 @@ namespace SmartHomeApp
         // Требование: у любого устройства должен быть флаг включения (чтение и запись)
         bool IsOn { get; set; }
 
+        event Action<string> Notify;
+      
+
         // Требование: устройство обязано уметь включаться (тела метода нет, только заголовок)
-        void TurnOn()
-        {
-            if (!IsOn)
-            {
-                System.Console.WriteLine($"[{Name}] включен");
-            }
-        }
+        void TurnOn();
+      
 
         // Требование: устройство обязано уметь выключаться (тела метода нет)
-        void TurnOff()
-        {
-            if (IsOn)
-            {
-                System.Console.WriteLine($"[{Name}] выключен");
-            }
-            
-        }
+        void TurnOff();
+        
 
         // МАГИЯ C# 8.0+: Реализация по умолчанию. 
         // Если класс сам не напишет метод PrintStatus, автоматически применится этот код.
@@ -41,6 +33,9 @@ namespace SmartHomeApp
             System.Console.WriteLine($"Устройство сейчас {(IsOn ? "Включено" : "Выключено")}");
             System.Console.WriteLine(new string('-',100));
         } 
+
+        public void DisplayNotify(string message);
+        
     }
 
 }

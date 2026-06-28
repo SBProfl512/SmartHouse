@@ -13,13 +13,17 @@ namespace SmartHomeApp
         // Состояние устройства. Изначально выключено (false).
         public bool IsOn { get; set; } = false;
 
+        public event Action<string>? Notify;
+        
+
         // Выполняем требование интерфейса по методу TurnOn
         public void TurnOn()
         {
             if (!IsOn)
             {
                 IsOn = true; // Меняем внутреннее состояние
-                System.Console.WriteLine($"{Name} плавно зажглась на 100%");
+                Notify?.Invoke($"{Name} плавно зажглась на 100%");
+                Notify += DisplayNotify;
             }
         }
 
@@ -29,10 +33,12 @@ namespace SmartHomeApp
             if (IsOn)
             {
                 IsOn = false; // Меняем внутреннее состояние
-                System.Console.WriteLine($"{Name} плавно потухла");
+                Notify?.Invoke($"{Name} плавно потухла");
             }
 
         }
+
+        public void DisplayNotify(string message) => System.Console.WriteLine(message);
     }
 
     // Класс "Умный чайник" тоже обязуется выполнить контракт ISmartDevice
@@ -44,13 +50,16 @@ namespace SmartHomeApp
         // Состояние чайника.
         public bool IsOn { get; set; } = false;
 
+        public event Action<string>? Notify;
+
         // Своя уникальная реакция на команду включения
         public void TurnOn()
         {
             if (!IsOn)
             {
                 IsOn = true;
-                System.Console.WriteLine($"{Name}, вода начинает закипать...");
+                Notify?.Invoke($"{Name}, вода начинает закипать...");
+                Notify += DisplayNotify;
             }
 
 
@@ -62,10 +71,13 @@ namespace SmartHomeApp
             if (IsOn)
             {
                 IsOn = false;
-                System.Console.WriteLine($"{Name} выключился");
+                Notify?.Invoke($"{Name} выключился");
+
             }
 
         }
+
+        public void DisplayNotify(string message) => System.Console.WriteLine(message);
     }
 
     public class SmartAirConditioner : ISmartDevice
@@ -86,13 +98,16 @@ namespace SmartHomeApp
         } = 20;
         public bool IsOn { get; set; } = false;
 
+        public event Action<string>? Notify;
+
         // Своя уникальная реакция на команду включения
         public void TurnOn()
         {
             if (!IsOn)
             {
                 IsOn = true;
-                System.Console.WriteLine($"{Name}, подано питание. Температурный режим {Temp} градусов Цельсия");
+                Notify?.Invoke($"{Name}, подано питание. Температурный режим {Temp} градусов Цельсия");
+                Notify += DisplayNotify;
             }
 
 
@@ -103,7 +118,7 @@ namespace SmartHomeApp
             if (IsOn)
             {
                 IsOn = false;
-                System.Console.WriteLine($"{Name} выключился");
+                Notify?.Invoke($"{Name} выключился");
             }
 
         }
@@ -113,11 +128,15 @@ namespace SmartHomeApp
             if (IsOn)
             {
                this.Temp = setTemp(this.Temp, temp);
-               System.Console.WriteLine($"Температурный режим [{Name}] изменен на {this.Temp} градусов Цельсия");
+               Notify?.Invoke($"Температурный режим [{Name}] изменен на {this.Temp} градусов Цельсия");
             }
             
         }
+
+        public void DisplayNotify(string message) => System.Console.WriteLine(message);
     }
+
+    
 }
 
 
