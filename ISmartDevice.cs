@@ -10,7 +10,7 @@ namespace SmartHomeApp
         string Name { get; }
        
         // Требование: у любого устройства должен быть флаг включения (чтение и запись)
-        bool IsOn { get; set; }
+        bool IsOn { get; }
 
         event Action<string> Notify;
       

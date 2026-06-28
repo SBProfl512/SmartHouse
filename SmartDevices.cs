@@ -11,7 +11,7 @@ namespace SmartHomeApp
         public string Name { get; } = "Лампа в гостинной";
 
         // Состояние устройства. Изначально выключено (false).
-        public bool IsOn { get; set; } = false;
+        public bool IsOn { get; private set; } = false;
 
         public event Action<string>? Notify;
 
@@ -53,7 +53,7 @@ namespace SmartHomeApp
         public string Name { get; } = "Чайник на кухне";
 
         // Состояние чайника.
-        public bool IsOn { get; set; } = false;
+        public bool IsOn { get; private set; } = false;
 
         public event Action<string>? Notify;
 
@@ -71,7 +71,8 @@ namespace SmartHomeApp
             {
                 IsOn = true;
                 Notify?.Invoke($"{Name}, вода начинает закипать...");
-                
+                System.Console.WriteLine("Чайник закипел");
+                TurnOff(); // автоматическое выключение чайника
             }
 
 
@@ -95,10 +96,10 @@ namespace SmartHomeApp
     public class SmartAirConditioner : ISmartDevice
     {
         public string Name { get; set; } = "Кондиционер на кухне";
-        private int Temp
+        public int Temp
         {
             get;
-            set
+            private set
             {
                 if (value >= 15 && value <= 45)
                 {
@@ -108,7 +109,7 @@ namespace SmartHomeApp
             }
 
         } = 20;
-        public bool IsOn { get; set; } = false;
+        public bool IsOn { get; private set; } = false;
 
         public event Action<string>? Notify;
 
