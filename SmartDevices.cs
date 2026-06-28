@@ -21,7 +21,6 @@ namespace SmartHomeApp
                 IsOn = true; // Меняем внутреннее состояние
                 System.Console.WriteLine($"{Name} плавно зажглась на 100%");
             }
-
         }
 
         // Выполняем требование интерфейса по методу TurnOff
@@ -113,7 +112,7 @@ namespace SmartHomeApp
         {
             if (IsOn)
             {
-               this.Temp = setTemp(temp, this.Temp);
+               this.Temp = setTemp(this.Temp, temp);
                System.Console.WriteLine($"Температурный режим [{Name}] изменен на {this.Temp} градусов Цельсия");
             }
             

@@ -36,6 +36,7 @@ namespace SmartHomeApp
         {
             // Важно: тип переменной в цикле указан как интерфейс (ISmartDevice).
             // Только благодаря этому C# видит метод по умолчанию PrintStatus().
+            Console.Clear();
             System.Console.WriteLine(new string('=',100));
             System.Console.WriteLine($"Стутус устройств дома ");
             foreach (ISmartDevice device in devices)

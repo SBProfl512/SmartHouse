@@ -29,15 +29,16 @@ namespace SmartHomeApp
             home.AddDivices(kettle);
             home.AddDivices(airCondice);
             airCondice.TurnOn();
+            if(lamp is ISmartDevice lampy) lampy.TurnOn();
 
-
-           if(airCondice is SmartAirConditioner airConditione) airConditione.SetTemp(5, (x,y) => x + y );
+            
+           if(airCondice is SmartAirConditioner airConditione) airConditione.SetTemp(5, (x,y) => x - y );
           
 
             // Выключаем весь дом одной кнопкой
             home.TurnOffEverytghing();
 
-            home.ShowStatuses();
+        
 
         
            
