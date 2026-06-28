@@ -31,13 +31,15 @@ namespace SmartHomeApp
             airCondice.TurnOn();
             
             lamp.TurnOn();
+            lamp.TurnOff();
+            lamp.TurnOn();
 
             
             airCondice.SetTemp(7, (x,y) => x + y );
           
 
-            // Выключаем весь дом одной кнопкой
-            home.TurnOffEverytghing();
+            
+           
 
 
         }

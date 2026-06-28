@@ -14,6 +14,11 @@ namespace SmartHomeApp
         public bool IsOn { get; set; } = false;
 
         public event Action<string>? Notify;
+
+        public SmartLamp()
+        {
+            Notify += DisplayNotify;
+        }
         
 
         // Выполняем требование интерфейса по методу TurnOn
@@ -23,7 +28,7 @@ namespace SmartHomeApp
             {
                 IsOn = true; // Меняем внутреннее состояние
                 Notify?.Invoke($"{Name} плавно зажглась на 100%");
-                Notify += DisplayNotify;
+                
             }
         }
 
@@ -52,6 +57,13 @@ namespace SmartHomeApp
 
         public event Action<string>? Notify;
 
+        
+
+        public SmartKettle()
+        {
+            Notify += DisplayNotify;
+        }
+
         // Своя уникальная реакция на команду включения
         public void TurnOn()
         {
@@ -59,7 +71,7 @@ namespace SmartHomeApp
             {
                 IsOn = true;
                 Notify?.Invoke($"{Name}, вода начинает закипать...");
-                Notify += DisplayNotify;
+                
             }
 
 
@@ -100,6 +112,11 @@ namespace SmartHomeApp
 
         public event Action<string>? Notify;
 
+        public SmartAirConditioner()
+        {
+            Notify += DisplayNotify;
+        }
+
         // Своя уникальная реакция на команду включения
         public void TurnOn()
         {
@@ -107,7 +124,7 @@ namespace SmartHomeApp
             {
                 IsOn = true;
                 Notify?.Invoke($"{Name}, подано питание. Температурный режим {Temp} градусов Цельсия");
-                Notify += DisplayNotify;
+                
             }
 
 
